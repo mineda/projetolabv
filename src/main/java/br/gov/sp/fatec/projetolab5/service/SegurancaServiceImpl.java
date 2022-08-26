@@ -23,6 +23,7 @@ public class SegurancaServiceImpl implements SegurancaService {
             usuario.getSenha() == null || 
             usuario.getSenha().isEmpty()) {
                 throw new IllegalArgumentException("Parâmetros errados!");
+                
             }
                 return usuarioRepo.save(usuario);
     }
