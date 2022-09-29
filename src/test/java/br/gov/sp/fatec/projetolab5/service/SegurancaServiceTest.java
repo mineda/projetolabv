@@ -33,7 +33,7 @@ public class SegurancaServiceTest {
         usuario.setNome("Teste");
         usuario.setSenha("Senha");
         Optional<Usuario> usuarioOp = Optional.of(usuario);
-        Mockito.when(usuarioRepo.findById(usuario.getId())).thenReturn(usuarioOp);
+        Mockito.when(usuarioRepo.findById(any())).thenReturn(usuarioOp);
         Mockito.when(usuarioRepo.save(any())).thenReturn(usuario);
     }
 
