@@ -36,6 +36,13 @@ public class Usuario {
     
     private Set<Autorizacao> autorizacoes;
 
+    public Usuario() {}
+
+    public Usuario(String nome, String senha) {
+        this.nome = nome;
+        this.senha = senha;
+    }
+
     public Long getId() {
         return id;
     }
