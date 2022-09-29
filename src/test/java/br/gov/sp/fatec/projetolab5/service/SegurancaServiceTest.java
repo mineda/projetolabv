@@ -3,6 +3,7 @@ package br.gov.sp.fatec.projetolab5.service;
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.mockito.ArgumentMatchers.any;
 
 import java.util.Optional;
 
@@ -33,7 +34,7 @@ public class SegurancaServiceTest {
         usuario.setSenha("Senha");
         Optional<Usuario> usuarioOp = Optional.of(usuario);
         Mockito.when(usuarioRepo.findById(usuario.getId())).thenReturn(usuarioOp);
-        Mockito.when(usuarioRepo.save(usuario)).thenReturn(usuario);
+        Mockito.when(usuarioRepo.save(any())).thenReturn(usuario);
     }
 
     @Test
