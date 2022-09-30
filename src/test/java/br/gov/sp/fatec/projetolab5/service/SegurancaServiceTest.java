@@ -5,6 +5,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.ArgumentMatchers.any;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -32,14 +34,17 @@ public class SegurancaServiceTest {
         usuario.setId(1L);
         usuario.setNome("Teste");
         usuario.setSenha("Senha");
+        List<Usuario> usuarios = new ArrayList<Usuario>();
+        usuarios.add(usuario);
         Optional<Usuario> usuarioOp = Optional.of(usuario);
         Mockito.when(usuarioRepo.findById(any())).thenReturn(usuarioOp);
         Mockito.when(usuarioRepo.save(any())).thenReturn(usuario);
+        Mockito.when(usuarioRepo.findAll()).thenReturn(usuarios);
     }
 
     @Test
     public void buscarUsuarioPorIdTestOk() {
-        assertEquals(service.buscarUsuarioPorId(1L).getNome(), "Teste");
+        assertEquals("Teste", service.buscarUsuarioPorId(1L).getNome());
     }
 
     @Test
@@ -54,6 +59,11 @@ public class SegurancaServiceTest {
         assertDoesNotThrow(() -> {
                 service.novoUsuario("Teste", "Senha");
             });
+    }
+
+    @Test
+    public void todosUsuariosTestOk() {
+        assertEquals(1, service.todosUsuarios().size());
     }
     
 }
