@@ -39,7 +39,8 @@ public class UsuarioControllerIntegrationTest {
         mvc.perform(get("/usuario/1")
             .accept(MediaType.APPLICATION_JSON))
             .andDo(print())
-            .andExpect(status().isOk());
+            .andExpect(status().isOk())
+            .andExpect(jsonPath("$.nome").value("admin"));
     }
 
 }
