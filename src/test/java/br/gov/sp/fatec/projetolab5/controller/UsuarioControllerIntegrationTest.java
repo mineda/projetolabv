@@ -36,7 +36,7 @@ public class UsuarioControllerIntegrationTest {
 
     @Test
     public void buscarPeloIdTestOk() throws Exception {
-        mvc.perform(get("/usuario/1")
+        mvc.perform(get("/usuario/{1}", 1L)
             .accept(MediaType.APPLICATION_JSON))
             .andDo(print())
             .andExpect(status().isOk())
