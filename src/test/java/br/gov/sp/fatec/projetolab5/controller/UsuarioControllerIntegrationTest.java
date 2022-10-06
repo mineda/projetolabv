@@ -7,6 +7,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
 import org.springframework.test.annotation.Rollback;
 import org.springframework.test.web.servlet.MockMvc;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
@@ -31,6 +32,15 @@ public class UsuarioControllerIntegrationTest {
             .andDo(print())
             .andExpect(status().isOk())
             .andExpect(jsonPath("$.id").exists());
+    }
+
+    @Test
+    public void buscarPeloIdTestOk() throws Exception {
+        mvc.perform(get("/usuario/{1}", 1L)
+            .accept(MediaType.APPLICATION_JSON))
+            .andDo(print())
+            .andExpect(status().isOk())
+            .andExpect(jsonPath("$.nome").value("admin"));
     }
 
 }

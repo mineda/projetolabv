@@ -33,11 +33,11 @@ public class UsuarioControllerTest {
         Mockito.when(service.novoUsuario(any())).thenReturn(usuario);
 
         mvc.perform(post("/usuario")
-            .content("{\"nome\":\"TesteMvc\", \"senha\":\"senha\"}")
-            .contentType(MediaType.APPLICATION_JSON))
-            .andDo(print())
-            .andExpect(status().isOk())
-            .andExpect(jsonPath("$.id").value(1L));
+        .content("{\"nome\":\"TesteMvc\", \"senha\":\"senha\"}")
+        .contentType(MediaType.APPLICATION_JSON))
+        .andDo(print())
+        .andExpect(status().isOk())
+        .andExpect(jsonPath("$.id").value(1L));
     }
     
 }
