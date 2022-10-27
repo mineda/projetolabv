@@ -1,5 +1,6 @@
 package br.gov.sp.fatec.projetolab5.service;
 
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,6 +33,9 @@ public class AnotacaoServiceImpl implements AnotacaoService{
         }
         catch(IllegalArgumentException exception) {
             throw new RuntimeException("Usuário não encontrado", exception);
+        }
+        if(anotacao.getDataHora() == null) {
+            anotacao.setDataHora(new Date());
         }
         anotacao.setUsuario(usuario);
         return anotacaoRepo.save(anotacao);
