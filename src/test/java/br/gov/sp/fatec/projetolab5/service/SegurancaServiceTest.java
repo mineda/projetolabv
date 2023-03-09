@@ -37,7 +37,7 @@ public class SegurancaServiceTest {
         List<Usuario> usuarios = new ArrayList<Usuario>();
         usuarios.add(usuario);
         Optional<Usuario> usuarioOp = Optional.of(usuario);
-        Mockito.when(usuarioRepo.findById(any())).thenReturn(usuarioOp);
+        Mockito.when(usuarioRepo.findById(1L)).thenReturn(usuarioOp);
         Mockito.when(usuarioRepo.save(any())).thenReturn(usuario);
         Mockito.when(usuarioRepo.findAll()).thenReturn(usuarios);
     }
@@ -45,6 +45,13 @@ public class SegurancaServiceTest {
     @Test
     public void buscarUsuarioPorIdTestOk() {
         assertEquals("Teste", service.buscarUsuarioPorId(1L).getNome());
+    }
+
+    @Test
+    public void buscarUsuarioPorIdTestNOk() {
+        assertThrows(IllegalArgumentException.class, () -> {
+            service.buscarUsuarioPorId(2L);
+        });
     }
 
     @Test
