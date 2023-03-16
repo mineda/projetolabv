@@ -11,6 +11,7 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+import static org.hamcrest.Matchers.*;
 
 @SpringBootTest
 @AutoConfigureMockMvc
@@ -37,6 +38,15 @@ public class UsuarioControllerIntegrationTest {
             .andDo(print())
             .andExpect(status().isOk())
             .andExpect(jsonPath("$.nome").value("admin"));
+    }
+
+    @Test
+    public void buscarTodosOk() throws Exception {
+        mvc.perform(get("/usuario")
+            .accept(MediaType.APPLICATION_JSON))
+            .andDo(print())
+            .andExpect(status().isOk())
+            .andExpect(jsonPath("$", hasSize(1)));
     }
 
 }
