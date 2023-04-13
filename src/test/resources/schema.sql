@@ -1,3 +1,4 @@
+drop table if exists cmt_comentario;
 drop table if exists ant_anotacao;
 drop table if exists uau_usuario_autorizacao;
 drop table if exists aut_autorizacao;
@@ -33,4 +34,13 @@ create table ant_anotacao (
   ant_usr_id bigint not null,
   primary key(ant_id),
   foreign key (ant_usr_id) references usr_usuario (usr_id)
+);
+
+create table cmt_comentario (
+  cmt_id bigint not null auto_increment,
+  cmt_texto varchar(200) not null,
+  cmt_data_hora datetime not null default current_timestamp,
+  cmt_ant_id bigint not null,
+  primary key(cmt_id),
+  foreign key (cmt_ant_id) references ant_anotacao (ant_id)
 );

@@ -1,3 +1,7 @@
+drop user if exists 'user'@'localhost';
+
+drop schema if exists anotacao;
+
 create schema anotacao;
 
 use anotacao;
@@ -38,6 +42,15 @@ create table ant_anotacao (
   foreign key ant_usuario_fk (ant_usr_id) references usr_usuario (usr_id)
 );
 
+create table cmt_comentario (
+  cmt_id bigint unsigned not null auto_increment,
+  cmt_texto varchar(200) not null,
+  cmt_data_hora datetime not null default current_timestamp,
+  cmt_ant_id bigint unsigned not null,
+  primary key(cmt_id),
+  foreign key cmt_ant_fk (cmt_ant_id) references ant_anotacao (ant_id)
+);
+
 insert into usr_usuario (usr_nome, usr_senha)
     values ('admin', '$2a$10$i3.Z8Yv1Fwl0I5SNjdCGkOTRGQjGvHjh/gMZhdc3e7LIovAklqM6C');
 insert into aut_autorizacao (aut_nome)
@@ -46,3 +59,5 @@ insert into uau_usuario_autorizacao (usr_id, aut_id)
     values (1, 1);
 insert into ant_anotacao (ant_texto, ant_usr_id) 
     values ('Esta é uma anotação de teste!', 1);
+insert into cmt_comentario (cmt_texto, cmt_ant_id)
+    values ('Essa anotação me ajudou muito na prova', 1);

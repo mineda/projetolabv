@@ -6,3 +6,5 @@ insert into uau_usuario_autorizacao (usr_id, aut_id)
     values (1, 1);
 insert into ant_anotacao (ant_texto, ant_usr_id) 
     values ('Esta é uma anotação de teste!', 1);
+insert into cmt_comentario (cmt_texto, cmt_ant_id)
+    values ('Essa anotação me ajudou muito na prova', 1);
