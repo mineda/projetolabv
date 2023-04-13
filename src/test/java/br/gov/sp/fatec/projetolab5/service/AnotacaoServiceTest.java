@@ -63,14 +63,10 @@ public class AnotacaoServiceTest {
     public void novaAnotacaoTextoNullTestNOk() {
         Usuario usuario = new Usuario();
         usuario.setId(1L);
-        usuario.setNome("Teste");
-        usuario.setSenha("abc123");
         Anotacao anotacao = new Anotacao();
         anotacao.setId(1L);
         anotacao.setUsuario(usuario);
         anotacao.setDataHora(new Date());
-        Mockito.when(segurancaService.buscarUsuarioPorId(1L)).thenReturn(usuario);
-        Mockito.when(anotacaoRepo.save(any())).thenReturn(anotacao);
         assertThrows(IllegalArgumentException.class, () -> {
             service.novaAnotacao(anotacao);
         });
@@ -80,8 +76,6 @@ public class AnotacaoServiceTest {
     public void novaAnotacaoTextoBlankTestNOk() {
         Usuario usuario = new Usuario();
         usuario.setId(1L);
-        usuario.setNome("Teste");
-        usuario.setSenha("abc123");
         Anotacao anotacao = new Anotacao();
         anotacao.setId(1L);
         anotacao.setTexto(" ");
@@ -103,6 +97,7 @@ public class AnotacaoServiceTest {
         });
     }
 
+    @Test
     public void novaAnotacaoUsuarioIdNullTestNOk() {
         Usuario usuario = new Usuario();
         Anotacao anotacao = new Anotacao();
