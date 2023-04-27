@@ -8,3 +8,5 @@ insert into ant_anotacao (ant_texto, ant_usr_id)
     values ('Esta é uma anotação de teste!', 1);
 insert into cmt_comentario (cmt_texto, cmt_ant_id)
     values ('Essa anotação me ajudou muito na prova', 1);
+insert into lnc_lancamento (lnc_descricao, lnc_data_hora_inicio, lnc_duracao, lnc_usr_id)
+    values('Prova', '2023-04-27 19:10:00', 2.1, 1);

@@ -1,8 +1,9 @@
+drop table if exists lnc_lancamento;
 drop table if exists cmt_comentario;
 drop table if exists ant_anotacao;
 drop table if exists uau_usuario_autorizacao;
 drop table if exists aut_autorizacao;
-drop table if exists usr_usuario;
+drop table if exists usr_usuario; 
 
 create table usr_usuario (
   usr_id bigint not null auto_increment,
@@ -43,4 +44,14 @@ create table cmt_comentario (
   cmt_ant_id bigint not null,
   primary key(cmt_id),
   foreign key (cmt_ant_id) references ant_anotacao (ant_id)
+);
+
+create table lnc_lancamento (
+  lnc_id bigint not null auto_increment,
+  lnc_descricao varchar(200) not null,
+  lnc_data_hora_inicio datetime not null,
+  lnc_duracao float not null,
+  lnc_usr_id bigint not null,
+  primary key(lnc_id),
+  foreign key (lnc_usr_id) references usr_usuario (usr_id)
 );
