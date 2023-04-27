@@ -51,6 +51,16 @@ create table cmt_comentario (
   foreign key cmt_ant_fk (cmt_ant_id) references ant_anotacao (ant_id)
 );
 
+create table lnc_lancamento (
+  lnc_id bigint unsigned not null auto_increment,
+  lnc_descricao varchar(200) not null,
+  lnc_data_hora_inicio datetime not null,
+  lnc_duracao float not null,
+  lnc_usr_id bigint unsigned not null,
+  primary key(lnc_id),
+  foreign key lnc_usr_fk (lnc_usr_id) references usr_usuario (usr_id)
+);
+
 insert into usr_usuario (usr_nome, usr_senha)
     values ('admin', '$2a$10$i3.Z8Yv1Fwl0I5SNjdCGkOTRGQjGvHjh/gMZhdc3e7LIovAklqM6C');
 insert into aut_autorizacao (aut_nome)
@@ -61,3 +71,5 @@ insert into ant_anotacao (ant_texto, ant_usr_id)
     values ('Esta é uma anotação de teste!', 1);
 insert into cmt_comentario (cmt_texto, cmt_ant_id)
     values ('Essa anotação me ajudou muito na prova', 1);
+insert into lnc_lancamento (lnc_descricao, lnc_data_hora_inicio, lnc_duracao, lnc_usr_id)
+    values('Prova', '2023-04-27 19:10:00', 2.1, 1);
