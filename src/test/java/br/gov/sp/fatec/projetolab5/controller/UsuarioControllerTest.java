@@ -28,7 +28,7 @@ public class UsuarioControllerTest {
 
     @Test
     public void novoUsuarioTestOk() throws Exception {
-        Usuario usuario = new Usuario("Teste", "senha");
+        Usuario usuario = new Usuario("TesteMvc", "senha");
         usuario.setId(1L);
         Mockito.when(service.novoUsuario(any())).thenReturn(usuario);
 
@@ -37,7 +37,9 @@ public class UsuarioControllerTest {
             .contentType(MediaType.APPLICATION_JSON))
             .andDo(print())
             .andExpect(status().isOk())
-            .andExpect(jsonPath("$.id").value(1L));
+            .andExpect(jsonPath("$.id").value(1L))
+            .andExpect(jsonPath("$.nome").value("TesteMvc"))
+            .andExpect(jsonPath("$.senha").value("senha"));
     }
     
 }
