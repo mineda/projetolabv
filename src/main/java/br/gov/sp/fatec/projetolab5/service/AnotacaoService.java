@@ -6,8 +6,12 @@ import br.gov.sp.fatec.projetolab5.entity.Anotacao;
 
 public interface AnotacaoService {
 
-    public Anotacao novaAnotacao(Anotacao anotacao);
+    public Anotacao novaAnotacao(String texto, String usuario);
 
-    public List<Anotacao> buscaAnotacoes(String texto);
+    public Anotacao buscarAnotacao(Long id);
+
+    public List<Anotacao> buscarTodasAnotacoes();
+
+    public Anotacao anotacaoComplementar(Long idAnotacao, String texto);
     
 }

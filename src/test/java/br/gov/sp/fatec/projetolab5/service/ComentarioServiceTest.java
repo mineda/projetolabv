@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.ArgumentMatchers.any;
 
+import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.Optional;
 
@@ -42,7 +43,7 @@ public class ComentarioServiceTest {
         anotacao.setId(1L);
         anotacao.setTexto("Anotação teste");
         anotacao.setUsuario(usuario);
-        anotacao.setDataHora(new Date());
+        anotacao.setDataHora(LocalDateTime.now());
         Comentario comentario = new Comentario();
         comentario.setId(1L);
         comentario.setTexto("Comentário teste");

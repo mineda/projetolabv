@@ -22,13 +22,23 @@ public class AnotacaoController {
     @Autowired
     private AnotacaoService service;
 
-    @GetMapping(value = "/{texto}")
-    public List<Anotacao> buscarPorTexto(@PathVariable("texto") String texto) {
-        return service.buscaAnotacoes(texto);
+    @GetMapping
+    public List<Anotacao> buscarTodasAnotacoes() {
+        return service.buscarTodasAnotacoes();
     }
 
-    @PostMapping
-    public Anotacao novaAnotacao(@RequestBody Anotacao anotacao) {
-        return service.novaAnotacao(anotacao);
+    @GetMapping(value = "/{id}")
+    public Anotacao buscarAnotacaoPorId(@PathVariable("id") Long id) {
+        return service.buscarAnotacao(id);
+    }
+
+    @PostMapping(value = "/novo/{texto}/{usuario}")
+    public Anotacao novaAnotacao(@PathVariable("texto") String texto, @PathVariable("usuario") String usuario) {
+        return service.novaAnotacao(texto, usuario);
+    }
+
+    @PostMapping(value = "/complemento/{texto}/{anotacao}")
+    public Anotacao anotacaoComplementar(@PathVariable("texto") String texto, @PathVariable("anotacao") Long idAnotacao) {
+        return service.anotacaoComplementar(idAnotacao, texto);
     }
 }
