@@ -28,6 +28,9 @@ public class AnotacaoServiceImpl implements AnotacaoService{
         if(texto == null || texto.isBlank() || usuario == null) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Texto ou usuário não informados!");
         }
+        if(texto.length() < 10) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Texto muito curto!");
+        }
         Optional<Usuario> usuarioOp = usuarioRepo.findByNome(usuario);
         if(usuarioOp.isEmpty()) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Usuário não encontrado!");
@@ -61,6 +64,9 @@ public class AnotacaoServiceImpl implements AnotacaoService{
         }
         Anotacao anotacaoOriginal = anotacaoOp.get();
         texto = texto + " - Original: " + anotacaoOriginal.getTexto();
+        if(texto.length() < 20) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Texto muito curto!");
+        }
         Anotacao anotacao = new Anotacao(texto, LocalDateTime.now(), anotacaoOriginal.getUsuario());
         return anotacaoRepo.save(anotacao);
     }    
