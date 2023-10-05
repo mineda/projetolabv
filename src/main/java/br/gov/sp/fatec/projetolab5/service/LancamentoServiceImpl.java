@@ -49,7 +49,7 @@ public class LancamentoServiceImpl implements LancamentoService {
 
     // Contas quantos lancamentos ultrapassam a duracao passada como parametro
     public Integer contarLancamentosComDuracaoSuperior(Float duracao) {
-        if(duracao <= 0f) {
+        if(duracao <= 10f) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Duracao deve ser maior que zero!");
         }
         return lancamentoRepo.countByDuracaoGreaterThan(duracao);
