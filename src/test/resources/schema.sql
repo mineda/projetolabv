@@ -1,3 +1,4 @@
+drop table if exists dcm_documento;
 drop table if exists lnc_lancamento;
 drop table if exists cmt_comentario;
 drop table if exists ant_anotacao;
@@ -54,4 +55,17 @@ create table lnc_lancamento (
   lnc_usr_id bigint not null,
   primary key(lnc_id),
   foreign key (lnc_usr_id) references usr_usuario (usr_id)
+);
+
+create table dcm_documento (
+  dcm_id bigint not null auto_increment,
+  dcm_tipo varchar(10) not null,
+  dcm_numero bigint not null,
+  dcm_digito int,
+  dcm_data_emissao date not null,
+  dcm_data_expiracao date,
+  dcm_usr_id bigint not null,
+  primary key(dcm_id),
+  unique(dcm_tipo, dcm_numero),
+  foreign key (dcm_usr_id) references usr_usuario (usr_id)
 );

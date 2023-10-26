@@ -61,6 +61,19 @@ create table lnc_lancamento (
   foreign key lnc_usr_fk (lnc_usr_id) references usr_usuario (usr_id)
 );
 
+create table dcm_documento (
+  dcm_id bigint unsigned not null auto_increment,
+  dcm_tipo varchar(10) not null,
+  dcm_numero bigint not null,
+  dcm_digito int,
+  dcm_data_emissao date not null,
+  dcm_data_expiracao date,
+  dcm_usr_id bigint unsigned not null,
+  primary key(dcm_id),
+  unique(dcm_tipo, dcm_numero),
+  foreign key dcm_usr_fk (dcm_usr_id) references usr_usuario (usr_id)
+);
+
 insert into usr_usuario (usr_nome, usr_senha)
     values ('admin', '$2a$10$i3.Z8Yv1Fwl0I5SNjdCGkOTRGQjGvHjh/gMZhdc3e7LIovAklqM6C');
 insert into aut_autorizacao (aut_nome)
@@ -73,3 +86,5 @@ insert into cmt_comentario (cmt_texto, cmt_ant_id)
     values ('Essa anotação me ajudou muito na prova', 1);
 insert into lnc_lancamento (lnc_descricao, lnc_data_hora_inicio, lnc_duracao, lnc_usr_id)
     values('Prova', '2023-04-27 19:10:00', 2.1, 1);
+insert into dcm_documento (dcm_tipo, dcm_numero, dcm_digito, dcm_data_emissao, dcm_usr_id)
+    values('rg', 11222333, 5, '2020-03-12', 1);
