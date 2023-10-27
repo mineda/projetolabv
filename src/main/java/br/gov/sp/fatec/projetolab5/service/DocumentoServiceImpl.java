@@ -1,5 +1,6 @@
 package br.gov.sp.fatec.projetolab5.service;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,6 +35,10 @@ public class DocumentoServiceImpl implements DocumentoService {
                 documento.getUsuario().getId() == null) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Campos obrigatórios não informados!");
         }
+        Optional<Documento> documentoOp = docRepo.findByTipoAndNumero(documento.getTipo(), documento.getNumero());
+        if(documentoOp.isPresent()) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Documento já cadastrado!");
+        }
         Optional<Usuario> usuarioOp = usuarioRepo.findById(documento.getUsuario().getId());
         if(usuarioOp.isEmpty()) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Usuário não encontrado!");
@@ -48,6 +53,14 @@ public class DocumentoServiceImpl implements DocumentoService {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Documento não encontrado!");
         }
         return documentoOp.get();
+    }
+
+    public List<Documento> buscarDocumentos(String nomeUsuario) {
+        List<Documento> documentos = docRepo.findByUsuarioNome(nomeUsuario);
+        if(documentos.isEmpty()) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Documento não encontrado!");
+        }
+        return documentos;
     }
     
 }

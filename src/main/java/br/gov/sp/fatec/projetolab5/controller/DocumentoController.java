@@ -1,5 +1,7 @@
 package br.gov.sp.fatec.projetolab5.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -28,6 +30,11 @@ public class DocumentoController {
     @GetMapping(value = "/{tipo}/{numero}")
     public Documento buscarDocumento(@PathVariable("tipo") String tipo, @PathVariable("numero") Long numero) {
         return service.buscarDocumento(tipo, numero);
+    }
+
+    @GetMapping(value = "/usuario/{usuario}")
+    public List<Documento> buscarDocumentosUsuario(@PathVariable("usuario") String nomeUsuario) {
+        return service.buscarDocumentos(nomeUsuario);
     }
     
 }
